@@ -1,26 +1,54 @@
-import { Injectable } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from "@nestjs/common"
+import { CreateUserDto } from "./dto/create-user.dto"
+import { UpdateUserDto } from "./dto/update-user.dto"
+import { UserRepository } from "./repositories/user.repository"
 
 @Injectable()
 export class UsersService {
-  create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+  constructor(private userRepository: UserRepository) {}
+
+  async create(createUserDto: CreateUserDto) {
+    const findUser = await this.userRepository.findByEmail(createUserDto.email)
+    if (findUser) {
+      throw new ConflictException("User already exists")
+    }
+    const user = await this.userRepository.create(createUserDto)
+    return user
   }
 
-  findAll() {
-    return `This action returns all users`;
+  async findAll() {
+    const users = await this.userRepository.findAll()
+    return users
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findOne(id: string) {
+    const findUser = await this.userRepository.findOne(id)
+
+    if (!findUser) {
+      throw new NotFoundException("User not found")
+    }
+    return findUser
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async update(id: string, updateUserDto: UpdateUserDto) {
+    const findUser = await this.userRepository.findOne(id)
+
+    if (!findUser) {
+      throw new NotFoundException("User not found")
+    }
+    return this.userRepository.update(id, updateUserDto)
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async delete(id: string) {
+    const findUser = await this.userRepository.findOne(id)
+
+    if (!findUser) {
+      throw new NotFoundException("User not found")
+    }
+    return this.userRepository.delete(id)
   }
 }

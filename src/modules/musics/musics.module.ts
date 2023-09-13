@@ -2,15 +2,17 @@ import { Module } from "@nestjs/common"
 import { MusicController } from "./musics.controllers"
 import { MusicService } from "./musics.service"
 import { MusicRepository } from "./repositories/musics.repository"
-import { MusicInMemoryRepository } from "./repositories/in-memory/musics.in-memory.repository"
+import { MusicPrismaRepository } from "./repositories/prisma/musics.prisma.repository"
+import { PrismaService } from "src/database/prisma.service"
 
 @Module({
   controllers: [MusicController],
   providers: [
     MusicService,
+    PrismaService,
     {
       provide: MusicRepository,
-      useClass: MusicInMemoryRepository,
+      useClass: MusicPrismaRepository,
     },
   ],
 })

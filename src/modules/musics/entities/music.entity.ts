@@ -7,9 +7,9 @@ export class Music {
   artist: string
   genre: string
   year: string
-  cover_img: string | null
+  cover_image: string | null
   music_url: string | null
-  user_id: string
+  userId: string
   constructor() {
     this.id = randomUUID()
   }
