@@ -4,6 +4,7 @@ import { CreateUserDto } from "../../dto/create-user.dto"
 import { User } from "../../entities/user.entity"
 import { PrismaService } from "src/database/prisma.service"
 import { UpdateUserDto } from "../../dto/update-user.dto"
+import { plainToInstance } from "class-transformer"
 
 @Injectable()
 export class UsersPrismaRepository implements UserRepository {
@@ -16,7 +17,7 @@ export class UsersPrismaRepository implements UserRepository {
     const createdUser = await this.prisma.user.create({
       data: { ...user },
     })
-    return createdUser
+    return plainToInstance(User, createdUser)
   }
 
   async findAll(): Promise<User[]> {
@@ -29,7 +30,7 @@ export class UsersPrismaRepository implements UserRepository {
       where: { id },
     })
 
-    return user
+    return plainToInstance(User, user)
   }
 
   async findByEmail(email: string): Promise<User> {
@@ -44,7 +45,7 @@ export class UsersPrismaRepository implements UserRepository {
       where: { id },
       data: { ...data },
     })
-    return updatedUser
+    return plainToInstance(User, updatedUser)
   }
   async delete(id: string): Promise<void> {
     await this.prisma.user.delete({
