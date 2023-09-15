@@ -51,4 +51,13 @@ export class UsersService {
     }
     return this.userRepository.delete(id)
   }
+
+  async findByEmail(email: string) {
+    const findUser = await this.userRepository.findByEmail(email)
+
+    if (!findUser) {
+      throw new NotFoundException("User not found")
+    }
+    return findUser
+  }
 }
