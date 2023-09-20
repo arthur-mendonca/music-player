@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Post, UseGuards } from "@nestjs/common"
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  UseGuards,
+  Request,
+} from "@nestjs/common"
 import { MusicService } from "./musics.service"
 import { CreateMusicDto } from "./dtos/create-music.dto"
 import { JwtAuthGuard } from "../auth/jwt-auth.guard"
@@ -9,8 +17,8 @@ export class MusicController {
 
   @Post()
   @UseGuards(JwtAuthGuard)
-  create(@Body() data: CreateMusicDto) {
-    return this.musicService.create(data)
+  create(@Body() data: CreateMusicDto, @Request() req) {
+    return this.musicService.create(data, req.user.id)
   }
 
   @Get()

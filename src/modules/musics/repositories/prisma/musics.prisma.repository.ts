@@ -8,12 +8,12 @@ import { PrismaService } from "src/database/prisma.service"
 export class MusicPrismaRepository implements MusicRepository {
   constructor(private prisma: PrismaService) {}
 
-  async create(data: CreateMusicDto): Promise<Music> {
+  async create(data: CreateMusicDto, userId: string): Promise<Music> {
     const music = new Music()
     Object.assign(music, { ...data })
 
     const newMusic = await this.prisma.music.create({
-      data: { ...music, userId: music.userId },
+      data: { ...music, userId },
     })
     return newMusic
   }

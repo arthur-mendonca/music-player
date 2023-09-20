@@ -6,8 +6,8 @@ import { MusicRepository } from "./repositories/musics.repository"
 export class MusicService {
   constructor(private musicRepository: MusicRepository) {}
 
-  async create(data: CreateMusicDto) {
-    return await this.musicRepository.create(data)
+  async create(data: CreateMusicDto, userId: string) {
+    return await this.musicRepository.create(data, userId)
   }
   async findAll() {
     return await this.musicRepository.findAll()
