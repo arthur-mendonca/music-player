@@ -1,8 +1,12 @@
 import { CreateMusicDto } from "../../dtos/create-music.dto"
+import { UpdateMusicDto } from "../../dtos/update-music.dto"
 import { Music } from "../../entities/music.entity"
 import { MusicRepository } from "../musics.repository"
 
 export class MusicInMemoryRepository implements MusicRepository {
+  update(data: UpdateMusicDto, id: string): Promise<Music> {
+    throw new Error("Method not implemented.")
+  }
   private database: Music[] = []
 
   async create(data: CreateMusicDto): Promise<Music> {

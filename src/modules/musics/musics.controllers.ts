@@ -54,6 +54,6 @@ export class MusicController {
     @Param("id") id: string,
   ) {
     const { cover_image, music } = files
-    console.log(cover_image, music)
+    return this.musicService.upload(cover_image[0], music[0], id)
   }
 }

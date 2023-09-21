@@ -1,4 +1,5 @@
 import { CreateMusicDto } from "../../dtos/create-music.dto"
+import { UpdateMusicDto } from "../../dtos/update-music.dto"
 import { Music } from "../../entities/music.entity"
 import { MusicRepository } from "../musics.repository"
 import { Injectable } from "@nestjs/common"
@@ -24,6 +25,13 @@ export class MusicPrismaRepository implements MusicRepository {
   async findOne(id: string): Promise<Music> {
     const music = await this.prisma.music.findUnique({
       where: { id },
+    })
+    return music
+  }
+  async update(data: UpdateMusicDto, id: string): Promise<Music> {
+    const music = await this.prisma.music.update({
+      where: { id },
+      data: { ...data },
     })
     return music
   }
