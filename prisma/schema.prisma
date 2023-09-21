@@ -29,7 +29,7 @@ model Music {
   year        String
   cover_image String?
   music_url   String?
-  user        User    @relation(fields: [userId], references: [id])
+  user        User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId      String
 
   @@map("musics")
