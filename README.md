@@ -61,6 +61,8 @@ In the .env.example you have these variables CLOUD_NAME, API_KEY, API_SECRET. Th
 
 Simply insert each value in the correspondent key and you should be able upload your songs to the cloud.
 
+Access (https://cloudinary.com/) to sign up and get the keys for connecting to the cloud.
+
 ## Test
 
 --> Tests not ready yet.
