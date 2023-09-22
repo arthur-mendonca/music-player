@@ -24,7 +24,13 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+This app is a Spotify-like API that allows the user to register himself and then upload his songs, which may contain details like artist's name, album name, song name, music genre, cover_image and the music_url.
+
+The music_url is intended to store a link to the URL that contains the song stored in the cloud.
+
+This app has a connection to Cloudinary cloud.
+
+The user should be able to upload his songs to the cloud and then listen to them through the cloud.
 
 ## Installation
 
@@ -45,7 +51,19 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
+This app is intendend to run with PostgreSQL.
+
+Considering you already have PostgreSQL installed in your machine, you should be able to connect to the database by simply inserting the proper accordingly to the example in .env.example file.
+
+## Connecting to the cloud
+
+In the .env.example you have these variables CLOUD_NAME, API_KEY, API_SECRET. The value for each one can be found at your user dashboard at cloudinary.com after you sign up.
+
+Simply insert each value in the correspondent key and you should be able upload your songs to the cloud.
+
 ## Test
+
+--> Tests not ready yet.
 
 ```bash
 # unit tests
@@ -58,15 +76,11 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
 ## Stay in touch
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- Author - [Arthur Mendonça](https://www.linkedin.com/in/arthur-silva-mendonça/)
+- Website - [https://www.arthurmendonca.com](https://www.arthurmendonca.com)
+- Instagram - [@arthurmendonca11](https://www.instagram.com/arthurmendonca11/)
 
 ## License
 
